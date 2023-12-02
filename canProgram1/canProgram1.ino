@@ -50,7 +50,7 @@ char output;
 int n;
 
 bool leds[16] = {0};*/
-telemetry car = {0,0,0,9000,0,0,0,0};
+telemetry car = {0,0,1,9000,0,0,0,0};
 
 void setup(void) {
   /*FastLED.addLeds<LEDTYPE, LEDPIN, COLORORDER>(leds, NUMLEDS).setCorrection( TypicalLEDStrip );
@@ -84,9 +84,9 @@ void loop() {
     msg_id = msg.id;
     /*if(msg_id == 0x700) { // Coolant and Oil Temp
       copyValues(&car.coolant_temp, &car.oil_pressure, msg);
-    } else*/ if(msg_id == 0x701) { //  Battery Voltage and Exhaust
+    } else if(msg_id == 0x701) { //  Battery Voltage and Exhaust*/
       copyValues(&car.battery_voltage, &car.lambda, msg);
-    } /*else if(msg_id == 0x702) { // Engine Speed and Throttle Pos
+    /*} else if(msg_id == 0x702) { // Engine Speed and Throttle Pos
       copyValues(&car.engine_speed, &car.throttle_pos, msg);
     } else if(msg_id == 0x703) { // Wheel Speeds
       copyValues(&car.wheel_speed_l, &car.wheel_speed_r, msg);
