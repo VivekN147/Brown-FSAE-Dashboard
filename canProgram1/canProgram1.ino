@@ -50,7 +50,7 @@ char output;
 int n;
 
 bool leds[16] = {0};*/
-telemetry car = {0,0,1,9000,0,0,0,0};
+telemetry car = {0,0,0,9000,0,0,0,0};
 
 void setup(void) {
   /*FastLED.addLeds<LEDTYPE, LEDPIN, COLORORDER>(leds, NUMLEDS).setCorrection( TypicalLEDStrip );
@@ -72,21 +72,21 @@ void setup(void) {
 // Copies two sets of an 8 bit number from the buffer into the values 
 void copyValues(float *value1, float *value2, CAN_message_t msg) {
   uint8_t a[4] = {msg.buf[3], msg.buf[2], msg.buf[1], msg.buf[0]};
-  memcpy(value1, &a, 2);
+  memcpy(value1, &a, 2); //2
 
   uint8_t b[4] = {msg.buf[7], msg.buf[6], msg.buf[5], msg.buf[4]};
-  memcpy(value2, &b, 3);
+  memcpy(value2, &b, 3); //3
 }
 
 void loop() {
-  
-  if (can1.read(msg) ) {
+  if (!can1.read(msg) ) {
     msg_id = msg.id;
+    Serial.println(msg_id);
     /*if(msg_id == 0x700) { // Coolant and Oil Temp
       copyValues(&car.coolant_temp, &car.oil_pressure, msg);
-    } else if(msg_id == 0x701) { //  Battery Voltage and Exhaust*/
+    } else*/ if(msg_id == 0x701) { //  Battery Voltage and Exhaust
       copyValues(&car.battery_voltage, &car.lambda, msg);
-    /*} else if(msg_id == 0x702) { // Engine Speed and Throttle Pos
+    } /*else if(msg_id == 0x702) { // Engine Speed and Throttle Pos
       copyValues(&car.engine_speed, &car.throttle_pos, msg);
     } else if(msg_id == 0x703) { // Wheel Speeds
       copyValues(&car.wheel_speed_l, &car.wheel_speed_r, msg);
