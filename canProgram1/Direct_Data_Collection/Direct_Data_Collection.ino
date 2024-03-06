@@ -3,6 +3,10 @@
 #define GEAR A7
 #define RPM 7
 
+// dont know if they should be int or float
+sumNum = 20;
+val1 = sumNum;
+
 float BoundN = 0;
 float Bound1 = 0.83;
 float Bound2 = 1.67;
@@ -70,4 +74,14 @@ void loop() {
   Serial.println(volt);
 
   delay(100);
+
+  // possible write structure (arduino -> nextion editor)
+  // This specific example is for a bar graph
+  delay(30);
+  Serial.print("object.val=" + String(val1)); //send as strinf
+  Serial.write(0xff);
+  Serial.write(0xff);
+  Serial.write(0xff);
+  sumNUm++;
+
 }
