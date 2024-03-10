@@ -84,4 +84,13 @@ void loop() {
   Serial.write(0xff);
   sumNUm++;
 
+  // possible write structure (arduino -> nextion editor)
+  // This specific example is for a Text/Number (Gear)
+  int GearVal = 2 // this would be the gear as the number/neutral/reverse
+  Serial.print("objname.val="); // print the variable we want to change on the screen
+  Serial.print(GearVal); // print the value we want to be displayed
+  Serial.write(0xff); // always add 3 full bytes after
+  Serial.write(0xff);
+  Serial.write(0xff);
+
 }
