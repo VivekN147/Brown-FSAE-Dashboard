@@ -145,7 +145,7 @@ void loop() {
     int low = (i*5);
     int high = (low + 5);
     if (RPMVal > low) & (RPMVal <= high) {
-      RPMBarVal = 1;
+      RPMBarVal = 100;
     } else {
       RPMBarVal = 0;
     }
