@@ -4,8 +4,8 @@
 #define RPM 7
 
 // dont know if they should be int or float
-sumNum = 20;
-val1 = sumNum;
+//sumNum = 20;
+//val1 = sumNum;
 
 float BoundN = 0;
 float Bound1 = 0.83;
@@ -77,20 +77,83 @@ void loop() {
 
   // possible write structure (arduino -> nextion editor)
   // This specific example is for a bar graph
-  delay(30);
-  Serial.print("object.val=" + String(val1)); //send as strinf
-  Serial.write(0xff);
-  Serial.write(0xff);
-  Serial.write(0xff);
-  sumNUm++;
+  //delay(30);
+  //Serial.print("object.val=" + String(val1)); //send as strinf
+  //Serial.write(0xff);
+  //Serial.write(0xff);
+  //Serial.write(0xff);
+  //sumNUm++;
 
   // possible write structure (arduino -> nextion editor)
   // This specific example is for a Text/Number (Gear)
-  int GearVal = 2 // this would be the gear as the number/neutral/reverse
-  Serial.print("objname.val="); // print the variable we want to change on the screen
-  Serial.print(GearVal); // print the value we want to be displayed
-  Serial.write(0xff); // always add 3 full bytes after
-  Serial.write(0xff);
-  Serial.write(0xff);
+  //int GearVal = 2 // this would be the gear as the number/neutral/reverse
+  //Serial.print("gear.val="); // print the variable we want to change on the screen
+  //Serial.print(GearVal); // print the value we want to be displayed
+  //Serial.write(0xff); // always add 3 full bytes after
+  //Serial.write(0xff);
+  //Serial.write(0xff);
+
+  // Coolant Temp
+  int CoolVal = 22;
+  Serial.print("coolant.val=" + String(CoolVal));
+  Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+
+  // Fan
+  string FanVal = "OFF";
+  Serial.print("fan.txt=" + String(FanVal));
+  Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+
+  // Battery
+  int BatteryVal = 2;
+  Serial.print("battery.val=" + String(BatteryVal));
+  Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+
+  // Gear - Needs fixing for both int (1-6) and string ("N")
+  string GearVal = "1";
+  Serial.print("gear.txt=" + String(GearVal));
+  Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+
+  // Traction Control
+  int TCVal = 1; // 0 = OFF, 1 = ON
+  Serial.print("tc.val=" + String(TCVal));
+  Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+
+  // Launch Control
+  int LCVal = 1; // 0 = OFF, 1 = ON
+  Serial.print("lc.val=" + String(LCVal));
+  Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+
+  // RPM1 = 2x Progress Bars
+  int RPMVal = 101; // Have rmp brought down from 13,500 --> 135 (so divided by 100)
+  if (RPMVal =< 100) {
+    Serial.print("p1.val=" + String(RPMVal));
+    Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+  } else if (RPMVal > 100) {
+    int RPMP2 = (RPMVal % 100);
+    int RPMP1 = (RPMVal - RPMP2);
+    Serial.print("p1.val=" + String(RPMP2)); 
+    Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+    Serial.print("p2.val=" + String(RPMP2));
+    Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+  }
+
+  // RPM2 = 27x Progress Bars
+  int RPMVal = 101; // // Have rmp brought down from 13,500 --> 135 (so divided by 100)
+  std::vector<std::string> rpmBars = {"j0", "j1", "j2", "j3", "j4", "j5", "j6", "j7", "j8", "j9", "j10", "j11", "j12", "j13", "j14", "j15", "j16", "j17", "j18", "j19", "j20", "j21", "j22", "j23", "j24", "j25", "j26"};
+  int RPMBarVal;
+  for (size_t i = 0; i < rpmBars.size(); ++i) {
+    int low = (i*5);
+    int high = (low + 5);
+    if (RPMVal > low) & (RPMVal <= high) {
+      RPMBarVal = 1;
+    } else {
+      RPMBarVal = 0;
+    }
+    Serial.print(rpmBars[i] + ".val=" + String(RPMBarVal));
+    Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+  }
+  // Ranges:
+  // {0, 1, 2, 3, 4, 5...}
+  // {0-5, 6-10, 11-15...}
 
 }
