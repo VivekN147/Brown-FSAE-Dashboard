@@ -125,13 +125,16 @@ void loop() {
 
   // RPM1 = 2x Progress Bars
   int RPMVal = 101; // Have rmp brought down from 13,500 --> 135 (so divided by 100)
-  if (RPMVal =< 100) {
+  if (RPMVal <= 100) {
     Serial.print("p1.val=" + String(RPMVal));
+    Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+    Serial.print("p2.val=0");
     Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
   } else if (RPMVal > 100) {
     int RPMP2 = (RPMVal % 100);
     int RPMP1 = (RPMVal - RPMP2);
-    Serial.print("p1.val=" + String(RPMP2)); 
+    RPMP2 = (RPMP2 * 100) / 35;
+    Serial.print("p1.val=" + String(RPMP1)); 
     Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     Serial.print("p2.val=" + String(RPMP2));
     Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
@@ -144,7 +147,7 @@ void loop() {
   for (size_t i = 0; i < rpmBars.size(); ++i) {
     int low = (i*5);
     int high = (low + 5);
-    if (RPMVal > low) & (RPMVal <= high) {
+    if (RPMVal > low) {
       RPMBarVal = 100;
     } else {
       RPMBarVal = 0;
