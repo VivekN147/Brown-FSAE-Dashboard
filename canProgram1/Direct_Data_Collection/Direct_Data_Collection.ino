@@ -110,7 +110,7 @@ void loop() {
 
   // Gear - Needs fixing for both int (1-6) and string ("N")
   string GearVal = "1";
-  Serial.print("gear.txt=" + String(GearVal));
+  Serial.print("gear.txt=" + GearVal);
   Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
 
   // Traction Control
