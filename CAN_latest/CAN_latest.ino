@@ -5,7 +5,7 @@ void setup() {
   while (!Serial);
 
   Serial.println("CAN Receiver Callback");
-  CAN.setPins(10, 2);
+  CAN.setPins(10, 24);
 
   CAN.setSPIFrequency(10E6);
   CAN.setClockFrequency(16E6);
@@ -17,8 +17,8 @@ void setup() {
   }
   
   // register the receive callback
-  //CAN.onReceive(onReceive);
-  onReceive(8);
+  CAN.onReceive(onReceive);
+  //onReceive(8);
 }
 
 void loop() {
