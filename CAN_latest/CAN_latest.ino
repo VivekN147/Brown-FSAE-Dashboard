@@ -5,7 +5,7 @@ void setup() {
   while (!Serial);
 
   Serial.println("CAN Receiver Callback");
-  CAN.setPins(10, 24);
+  CAN.setPins(10, 2);
 
   CAN.setSPIFrequency(10E6);
   CAN.setClockFrequency(16E6);
@@ -54,7 +54,7 @@ void onReceive(int packetSize) {
 
       // only print packet data for non-RTR packets
       while (CAN.available()) {
-        Serial.print((char)CAN.read());
+        Serial.print((char)CAN.read()); 
       }
       Serial.println();
     }
