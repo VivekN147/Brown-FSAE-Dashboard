@@ -42,8 +42,9 @@ void loop() {
     previousCountMillis += countMillis;
     // show Hz on Serial too if available
     //Serial.print(count);
-    //Serial.println(" Hz");
-    Serial.print(count2);
+    //Serial.println(" Hz")
+    long ratio = count2 / count;
+    Serial.print(ratio);
     Serial.println(" Hz");
 
     // -------------------------------- OTHER OBJECTS -----------------------------------------------------------
@@ -57,8 +58,22 @@ void loop() {
     int BatteryVal = 7;
     Serial.print("battery.val=" + String(BatteryVal)); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     // Gear
-    String GearVal = "\"N\""; // Options: "\"N\"" or "\"i\"" where i = 0,1,2,3,4,5,6 - maybe not 0
-    Serial.print("gear.txt=" + GearVal); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
+    if (1 <= ratio < 2) {
+      Serial.print("gear.txt=\"1\""); // Never use this gear?
+    } else if (2 <= ratio < 3){
+      Serial.print("gear.txt=\"N\""); 
+    } else if (3 <= ratio < 4){
+      Serial.print("gear.txt=\"2\"");
+    } else if (4 <= ratio < 5){
+      Serial.print("gear.txt=\"3\"");
+    } else if (5 <= ratio < 6){
+      Serial.print("gear.txt=\"4\"");
+    } else if (6 <= ratio < 7){
+      Serial.print("gear.txt=\"5\"");
+    } else if (7 <= ratio < 8){
+      Serial.print("gear.txt=\"6\"");
+    }
+    Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     // Traction Control
     int TCVal = 0; // Options: 0 = OFF, 1 = ON
     Serial.print("tc.val=" + String(TCVal)); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
