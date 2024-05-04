@@ -43,27 +43,27 @@ void loop() {
     // show Hz on Serial too if available
     //Serial.print(count);
     //Serial.println(" Hz");
-    //Serial.print(count2);
-    //Serial.println(" Hz");
+    Serial.print(count2);
+    Serial.println(" Hz");
 
     // -------------------------------- OTHER OBJECTS -----------------------------------------------------------
     // Coolant Temp
-    int CoolVal = 39;
+    int CoolVal = 22;
     Serial.print("coolant.val=" + String(CoolVal)); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     // Fan
-    String FanVal = "\"ON\""; // Options: "\"ON\"", "\"OFF\"" - maybe "\"AUTO\""
+    String FanVal = "\"AUTO\""; // Options: "\"ON\"", "\"OFF\"" - maybe "\"AUTO\""
     Serial.print("fan.txt=" + FanVal); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     // Battery
-    int BatteryVal = 2;
+    int BatteryVal = 7;
     Serial.print("battery.val=" + String(BatteryVal)); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     // Gear
-    String GearVal = "\"1\""; // Options: "\"N\"" or "\"i\"" where i = 0,1,2,3,4,5,6 - maybe not 0
+    String GearVal = "\"N\""; // Options: "\"N\"" or "\"i\"" where i = 0,1,2,3,4,5,6 - maybe not 0
     Serial.print("gear.txt=" + GearVal); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     // Traction Control
-    int TCVal = 1; // Options: 0 = OFF, 1 = ON
+    int TCVal = 0; // Options: 0 = OFF, 1 = ON
     Serial.print("tc.val=" + String(TCVal)); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     // Launch Control
-    int LCVal = 1; // Options: 0 = OFF, 1 = ON
+    int LCVal = 0; // Options: 0 = OFF, 1 = ON
     Serial.print("lc.val=" + String(LCVal)); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     // -------------------------------- OTHER OBJECTS END -------------------------------------------------------
     
@@ -83,7 +83,7 @@ void loop() {
     //int RPMP2 = (engineSpeedScaled % 100) * 100 / 35;
     //Serial.print("p1.val=100"); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     //Serial.print("p2.val=" + String(RPMP2)); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
-    }
+    }       vcccv      
 
     // reset to zero for the next half second's sample
     count = 0L;
