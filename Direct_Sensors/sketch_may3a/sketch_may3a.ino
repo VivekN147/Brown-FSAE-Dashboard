@@ -98,7 +98,7 @@ void loop() {
     //int RPMP2 = (engineSpeedScaled % 100) * 100 / 35;
     //Serial.print("p1.val=100"); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
     //Serial.print("p2.val=" + String(RPMP2)); Serial.write(0xff); Serial.write(0xff); Serial.write(0xff);
-    }       vcccv      
+    }       
 
     // reset to zero for the next half second's sample
     count = 0L;
